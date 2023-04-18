@@ -1,0 +1,1 @@
+emrun --no_browser --no_emrun_detect --serve_root public serve ./public/index.html
