@@ -14,6 +14,8 @@ int main(void) {
 
     emscripten_set_main_loop(UpdateDrawFrame, 0, 1);
 
+
+
     CloseWindow();
 
     return 0;

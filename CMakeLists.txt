@@ -16,14 +16,5 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -s USE_GLFW=3 -s ASSERTIONS=1 -s WASM=1 -s A
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_GLFW=3 -s ASSERTIONS=1 -s WASM=1 -s ASYNCIFY")
 set(CMAKE_EXECUTABLE_SUFFIX ".html") # This line is used to set your executable to build with the emscripten html template so that you can directly open it.
 
-file(GLOB SOURCES src/*.cpp)
-add_executable(Eugine ${SOURCES}) 
-
-
-find_package(raylib 3.0 CONFIG REQUIRED)
-
-
-
-# Add Raylib
-target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
-target_include_directories(${PROJECT_NAME} PRIVATE include)
+add_subdirectory(lib)
+add_subdirectory(Eugine)
