@@ -50,4 +50,4 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run image
-        run:  docker stack deploy -c docker-compose.yml ${{ github.event.repository.name }}
+        run:  docker stack deploy -c docker-compose.yml eugine
