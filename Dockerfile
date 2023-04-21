@@ -14,4 +14,4 @@ WORKDIR /app
 COPY --from=build /app/public /app
 
 EXPOSE 3000
-ENTRYPOINT [ "npx", "serve", "-s", "." ]
+ENTRYPOINT [ "npx", "serve" ]
