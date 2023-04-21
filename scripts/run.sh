@@ -1,1 +1,1 @@
-emrun --no_browser --no_emrun_detect --serve_root public serve ./public/index.html
+npx browser-sync start -s -f public/* --no-notify --port 3000 --ss public --no-ui --no-open

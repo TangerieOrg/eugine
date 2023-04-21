@@ -1,23 +1,30 @@
 #include <iostream>
-
+#include <string> 
 #include "raylib.h"
 
 #include <emscripten/emscripten.h>
+#include <emscripten/html5.h>
 
-const int screenWidth = 1920;
-const int screenHeight = 1080;
+#include "Utils/screen.hpp"
+#include "game.hpp"
+
+#include "tokens.hpp"
+
+#define PLATFORM_WEB
 
 void UpdateDrawFrame(void);
 
-int main(void) {
-    InitWindow(screenWidth, screenHeight, "Basic Window");
+Screen screen(0, 0);
+Game game;
 
+void NullLogger(int msgType, const char *text, va_list args) {}
+
+int main(void) {
+    SetTraceLogCallback(NullLogger);
+    screen.Init();
     emscripten_set_main_loop(UpdateDrawFrame, 0, 1);
 
-
-
-    CloseWindow();
-
+    screen.Close();
     return 0;
 }
 
@@ -25,12 +32,11 @@ void UpdateDrawFrame(void) {
     BeginDrawing();
 
     ClearBackground(Color{0, 0, 0, 255});
+    
+    game.OnUpdate();
 
-    auto mousePos = GetMousePosition();
-
-    DrawLine(mousePos.x, 0, mousePos.x, screenHeight, RED);
-    DrawLine(0, mousePos.y, screenWidth, mousePos.y, RED);
-    DrawText("Hello World", screenWidth / 2 - MeasureText("Hello World", 30) / 2, screenHeight / 2 - 15, 30, RAYWHITE);
+    auto fpsStr = std::to_string(GetFPS());
+    DrawText(fpsStr.c_str(), 0, 0, 30, RAYWHITE);
 
     EndDrawing();
 }
